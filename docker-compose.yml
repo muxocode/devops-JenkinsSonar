@@ -1,0 +1,52 @@
+version: '3.2'
+services:
+  mysql:
+    build:
+      context: mysql/
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - ${PORT_MYSQL}:3306
+    volumes:
+      - ${URL_BASE}/${URL_MYSQL}:/var/lib/mysql
+    restart: always
+  sonarqube:
+    build:
+      context: sonarqube/
+    ports:
+      - ${PORT_SONAR1}:9000
+      - ${PORT_SONAR2}:9092
+    container_name: sonarqube
+    links:
+    - mysql:db
+    environment:
+      - SONARQUBE_JDBC_USERNAME=${MYSQL_USER}
+      - SONARQUBE_JDBC_PASSWORD=${MYSQL_PASSWORD}
+      - SONARQUBE_JDBC_URL=jdbc:mysql://mysql:${PORT_MYSQL}/${MYSQL_DATABASE}?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useSSL=false&&useConfigs=maxPerformance
+    depends_on:
+      - mysql
+    volumes:
+      - ${URL_BASE}/${URL_SONAR_CONF}:/opt/sonarqube/conf
+      - ${URL_BASE}/${URL_SONAR_DATA}:/opt/sonarqube/data
+      - ${URL_BASE}/${URL_SONAR_EXTENSIONS}:/opt/sonarqube/extensions
+      - ${URL_BASE}/${URL_SONAR_PLUGINS}:/opt/sonarqube/lib/bundled-plugins
+    restart: always
+  jenkins:
+    build:
+      context: jenkins/
+    privileged: true
+    user: root
+    ports:
+      - ${PORT_JENKINS1}:8080
+      - ${PORT_JENKINS2}:50000
+    container_name: jenkins
+    volumes:
+      - ${URL_BASE}/${URL_JENKINS}:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+    depends_on:
+      - sonarqube
+    restart: always
