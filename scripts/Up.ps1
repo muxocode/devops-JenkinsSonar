@@ -19,7 +19,7 @@ for($i=0; $i -lt $ArrayDir.Count; $i++){
 Write-Host ""
 Write-Host ""
 Write-Host "The code be with you"
-Write-Host "  -- QRMA FORCE --  "
+Write-Host "  -- MuxoCode --  "
 
 Start-Sleep -s 10
 docker-compose up --build
