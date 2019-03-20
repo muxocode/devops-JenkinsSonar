@@ -11,7 +11,7 @@ services:
     ports:
       - ${PORT_MYSQL}:3306
     volumes:
-      - ${URL_BASE}/${URL_MYSQL}:/var/lib/mysql
+      - ${URL_BASE}\${URL_MYSQL}:/var/lib/mysql
     restart: always
   sonarqube:
     build:
@@ -29,10 +29,10 @@ services:
     depends_on:
       - mysql
     volumes:
-      - ${URL_BASE}/${URL_SONAR_CONF}:/opt/sonarqube/conf
-      - ${URL_BASE}/${URL_SONAR_DATA}:/opt/sonarqube/data
-      - ${URL_BASE}/${URL_SONAR_EXTENSIONS}:/opt/sonarqube/extensions
-      - ${URL_BASE}/${URL_SONAR_PLUGINS}:/opt/sonarqube/lib/bundled-plugins
+      - ${URL_BASE}\${URL_SONAR_CONF}:/opt/sonarqube/conf
+      - ${URL_BASE}\${URL_SONAR_DATA}:/opt/sonarqube/data
+      - ${URL_BASE}\${URL_SONAR_EXTENSIONS}:/opt/sonarqube/extensions
+      - ${URL_BASE}\${URL_SONAR_PLUGINS}:/opt/sonarqube/lib/bundled-plugins
     restart: always
   jenkins:
     build:
@@ -44,7 +44,7 @@ services:
       - ${PORT_JENKINS2}:50000
     container_name: jenkins
     volumes:
-      - ${URL_BASE}/${URL_JENKINS}:/var/jenkins_home
+      - ${URL_BASE}\${URL_JENKINS}:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
     depends_on:

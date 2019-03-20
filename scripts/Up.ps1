@@ -8,7 +8,7 @@ Write-Host ""
 Write-Host ""
 
 for($i=0; $i -lt $ArrayDir.Count; $i++){
-    $dir = "$($baseDir)/$($ArrayDir.Get($i))"
+    $dir = "$($baseDir)\$($ArrayDir.Get($i))"
     if ( !( Test-Path $dir -PathType Any ) ) 
     { 
         mkdir $dir
