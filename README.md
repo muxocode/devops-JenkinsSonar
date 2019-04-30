@@ -1,18 +1,22 @@
-# Integración continua con JENKINS + SONARQUBE
+# JENKINS + SONARQUBE for WINDOWS
 ![TITULO](imgs/title.png "Tree example")
-## URLs y repositorios
+## Repositories & URLs
 ### Eviroment
-Se puedes configurar los puertos y volúmenes según el archivo .env
+You can configure as your desire changing .env file
 ### Urls
-- *Jenkins* está configurado para levantarse en el puerto 9001. Por lo que la URL sería <IPMáquina>:9001, es decir localhost:9001
-- *SonarQube* está configurado para levantarse ne el puerto 9000. Por lo que la URL sería <IPMáquina>:9000, es decir localhost:9000
-### Volúmenes
-Para la persistencia de datos, se ha enlazado con volúmenes NFS(Windows), que se han situado en *C:/docker_volumes*, de no existir las carpetas, el proceso de arranque las crea.
-## Para amantes de Windows :-)
-### Arrancar
-Para arrancar basta con ejecutar el scripr *Up.bat* de la carpeta raíz.
-### Parar
-Para parar el componente basta con ejecutar el scripr *down.bat* de la carpeta raíz
-## Primera ejecución
-- *Jenkins*: Hay que abrir la password de usuario alojado en el volumen: docker_volumes\sonarJenkins\jenkins\secret.key
-- *SonarQube* El usuario por defecto es admin/admin
+- *Jenkins* is configured to run in 9001 port. So, the URL will be <IPMachine>:9001, that is to say localhost:9001
+- *SonarQube* is configured to run in 9001 port. So, the URL will be <IPMachine>:9001, that is to say localhost:9001
+### Volumes
+For data persistence, it has been linked with NFS volumes (Windows), which have been placed in *C:\docker_volumes*, if the folders do not exist, the boot process creates them.
+## For windows lovers :-)
+### Start up
+To start, simply execute the *Up.bat* script of the root folder.
+### Stop
+To stop the component, simply execute the *down.bat* script of the root folder.
+## First execution
+- *Jenkins*: You must open the user password stored in the volume: docker_volumes\sonarJenkins\jenkins\secret.key
+- *SonarQube* The default user is admin/admin
+## References
+- [Jenkins](https://hub.docker.com/_/jenkins)
+- [SonarQube](https://hub.docker.com/_/sonarqube)
+- [MySql](https://hub.docker.com/_/mysql)

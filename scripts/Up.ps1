@@ -22,5 +22,5 @@ Write-Host "The code be with you"
 Write-Host "  -- MuxoCode --  "
 
 Start-Sleep -s 10
-docker-compose up --build
+docker-compose -f docker-compose-windows.yml up --build
 
